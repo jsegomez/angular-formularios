@@ -1,0 +1,152 @@
+<div class="row d-flex justify-content-center mt-5 animate__animated animate__fadeIn">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-5">
+        <div class="card">
+            <div class="card-header">
+                Formularios Template
+            </div>
+            <div class="card-body">
+                <form autocomplete="off" (ngSubmit)="guardar(formCliente)" #formCliente="ngForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombres</label>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            placeholder="Nombres"
+                            id="nombre"
+                            name="nombre"    
+                            #nombre="ngModel"                        
+                            [(ngModel)]="cliente.nombre"
+                            required
+                            minlength="2"
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': nombre.invalid && nombre.touched}"
+                        >
+                        <small *ngIf="nombre.errors?.required && nombre.touched" class="text-danger">
+                            *Por favor ingrese el nombre del cliente
+                        </small>
+                        <small *ngIf="nombre.errors?.minlength &&
+                            nombre.touched" class="text-danger">
+                            *Debe contener al menos dos caracteres
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="apellido"
+                            placeholder="Apellidos"
+                            name="apellido"
+                            #apellido="ngModel"
+                            [(ngModel)]="cliente.apellido"
+                            required                            
+                            minlength="2"
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': apellido.invalid && apellido.touched}"
+                        >
+                        <small *ngIf="apellido.errors && apellido.touched" class="text-danger">
+                            *Ingrese apellido con al menos dos caracteres
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo</label>
+                        <input 
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Correo electronico"
+                            name="email"
+                            #email="ngModel"
+                            [(ngModel)]="cliente.email"
+                            required    
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': email.invalid && email.touched}"        
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                        >
+                        <small *ngIf="email.errors && email.touched" class="text-danger">
+                            *Ingrese un correo electrónico válido
+                        </small>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="createAt">Fecha</label>
+                        <input 
+                            type="date"
+                            class="form-control"        
+                            id="createAt"
+                            name="createAt"
+                            #createAt="ngModel"
+                            [(ngModel)]="cliente.createAt"
+                            required                  
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': createAt.invalid && createAt.touched}"              
+                        >
+                        <small *ngIf="createAt.errors && createAt.touched" class="text-danger">
+                            *Ingrese apellido con al menos dos caracteres
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="createAt">País</label>
+                        <select 
+                            class="form-control"
+                            id="pais"
+                            name="pais"
+                            #pais="ngModel"
+                            [(ngModel)]="cliente.pais"
+                            required
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': pais.invalid && pais.touched}"              
+                        >
+                            <option *ngFor="let pais of paises" [value]="pais.codigo">
+                                {{ pais.nombre }}
+                            </option>
+                        </select>
+                        <small *ngIf="pais.errors && pais.touched" class="text-danger">
+                            *Favor seleccionar un país
+                        </small>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="createAt">Estado civil</label>
+                        <div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input 
+                                    type="radio"
+                                    id="soltero"
+                                    name="genero"
+                                    class="custom-control-input"
+                                    name="genero"
+                                    value="masculino"
+                                    required
+                                    #genero="ngModel"
+                                    [(ngModel)]="cliente.genero"
+                                    [ngClass]="{'is-invalid animate__animated animate__headShake': genero.invalid && genero.touched}"
+                                >
+                                <label class="custom-control-label" for="soltero">Masculino</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input 
+                                    type="radio"
+                                    id="casado"
+                                    name="genero"
+                                    class="custom-control-input"
+                                    name="genero"
+                                    value="femenino"
+                                    required
+                                    #genero="ngModel"
+                                    [(ngModel)]="cliente.genero"
+                                    [ngClass]="{'is-invalid animate__animated animate__headShake': genero.invalid && genero.touched}"
+                                >
+                                <label class="custom-control-label" for="casado">Femenino</label>
+                            </div>  
+                            <small *ngIf="genero.errors && genero.touched" class="text-danger">
+                                *Favor seleccionar genero
+                            </small>  
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
